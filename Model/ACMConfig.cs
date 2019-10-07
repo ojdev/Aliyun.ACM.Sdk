@@ -2,6 +2,9 @@
 
 namespace Aliyun.ACM.Sdk.Model
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ACMConfig
     {
         /// <summary>

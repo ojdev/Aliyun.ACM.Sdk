@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Aliyun.ACM.Sdk</RootNamespace>
     <AssemblyName>Aliyun.ACM.Sdk</AssemblyName>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -10,17 +10,11 @@
     <Company>欧俊</Company>
     <Product>Aliyun.ACM.Sdk</Product>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Description>应用配置管理（Application Configuration Management，简称 ACM），是一款在分布式架构环境中对应用配置进行集中管理和推送的工具类产品。基于该产品，您可以在微服务、DevOps、大数据等场景下极大地减轻配置管理的工作量，增强配置管理的服务能力。
-
-| API                  | 方法名                    |        |
-| -------------------- | ------------------------- | ------ |
-|                      | GetIPAsync                | 已实现 |
-| getConfig            | GetConfigAsync            | 已实现 |
-| addListener          |                           | 未实现 |
-| getAllConfigByTenant | GetAllConfigByTenantAsync | 已实现 |
-| syncUpdateAll        | SyncUpdateAllAsync        | 已实现 |
-| deleteAllDatums      | DeleteAllDatumsAsync      | 已实现 |</Description>
-    <Version>0.0.1</Version>
+    <Description>应用配置管理（Application Configuration Management，简称 ACM），是一款在分布式架构环境中对应用配置进行集中管理和推送的工具类产品。基于该产品，您可以在微服务、DevOps、大数据等场景下极大地减轻配置管理的工作量，增强配置管理的服务能力。</Description>
+    <Version>0.0.2</Version>
+    <RepositoryUrl>https://github.com/ojdev/Aliyun.ACM.Sdk</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ojdev/Aliyun.ACM.Sdk</PackageProjectUrl>
+    <RepositoryType>github</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -28,8 +22,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="aliyun-net-sdk-core" Version="1.5.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="aliyun-net-sdk-core" Version="1.5.3" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
 
 </Project>

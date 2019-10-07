@@ -1,10 +1,10 @@
 ﻿using Aliyun.ACM.Sdk.Model;
 using Aliyun.Acs.Core;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Aliyun.ACM.Sdk
@@ -14,7 +14,10 @@ namespace Aliyun.ACM.Sdk
     /// </summary>
     public class ACMClient : IDisposable
     {
-        public readonly string endpoint = "acm.aliyun.com";
+        /// <summary>
+        /// 
+        /// </summary>
+        private readonly string endpoint;
         private readonly HttpClient _net;
         private readonly HmacSHA1Signer _hmacSHA1 = new HmacSHA1Signer();
         private readonly string _accessKey;
@@ -25,8 +28,10 @@ namespace Aliyun.ACM.Sdk
         /// <param name="net"></param>
         /// <param name="accessKey"></param>
         /// <param name="secretKey"></param>
-        public ACMClient(HttpClient net, string accessKey, string secretKey)
+        /// <param name="_endpoint"></param>
+        public ACMClient(HttpClient net, string accessKey, string secretKey, string _endpoint = "acm.aliyun.com")
         {
+            endpoint = _endpoint;
             _net = net ?? throw new ArgumentNullException(nameof(net));
             _accessKey = accessKey ?? throw new ArgumentNullException(nameof(accessKey));
             _secretKey = secretKey ?? throw new ArgumentNullException(nameof(secretKey));
@@ -86,7 +91,7 @@ namespace Aliyun.ACM.Sdk
             request.Content = new StringContent("", encoding: Encoding.UTF8);
             var response = await _net.SendAsync(request);
             var respText = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<ACMConfig>(respText);
+            return JsonSerializer.Deserialize<ACMConfig>(respText);
         }
         /// <summary>
         /// 
@@ -111,6 +116,13 @@ namespace Aliyun.ACM.Sdk
             var respText = await response.Content.ReadAsStringAsync();
             return respText;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tenant"></param>
+        /// <param name="dataId"></param>
+        /// <param name="group"></param>
+        /// <returns></returns>
         public async Task<string> DeleteAllDatumsAsync(string tenant, string dataId, string group)
         {
             var ip = await GetIPAsync();
@@ -125,7 +137,9 @@ namespace Aliyun.ACM.Sdk
             var respText = await response.Content.ReadAsStringAsync();
             return respText;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             if (_net != null)
